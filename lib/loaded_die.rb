@@ -1,6 +1,7 @@
 class LoadedDie
   attr_reader :sides
   attr_reader :probabilities
+  attr_reader :normalized_probabilities
   
   def initialize(*probabilities)
     @probabilities = probabilities
@@ -15,6 +16,12 @@ class LoadedDie
     
     # The original algorithm calls for probabilities that sum to 1. 
     sum = probabilities.inject(0) { |a,e| a + e }
+
+    # This is not needed for the algorithm, but is a nice thing to have.
+    @normalized_probabilities = 
+      probabilities.map { |e| e/Float(sum) }
+
+    # This is what we'll work with.
     mul_probabilities = probabilities.map { |e| e*sides/Float(sum) }
     
     # Partition into worklists small and large
