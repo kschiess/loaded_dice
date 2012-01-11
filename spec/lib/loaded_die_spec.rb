@@ -12,22 +12,31 @@ describe LoadedDie do
   end
   
   describe 'random bias, 6 sides' do
-    let(:die) { described_class.new(*6.times.map { rand(10) }) }
+    let(:die) { described_class.new(*6.times.map { 1+rand(10) }) }
 
     let(:experimental_distr) { throw_n(die, 100_000) }
     let(:theoretical_distr) { die.normalized_probabilities.
       map { |e| e * 100_000 }}
+      
+    before(:each) { 
+      if theoretical_distr.
+        any? { |e| e<10 }
+        warn "Precondition for chi^2 not fulfilled."
+        @skip = true
+      end
+    }
     
     def chi2_score(de, dt)
       de.zip(dt).inject(1) { |a, (o, e)|
+        fail if e <= 0.0000001
         a * ((o - e)**2 / Float(e))
       }
     end
     
     describe 'chi-square test at a level of p=0.05' do
       it "should pass" do
-        score = chi2_score(experimental_distr, theoretical_distr)
-        unless score.nan?
+        unless @skip
+          score = chi2_score(experimental_distr, theoretical_distr)
           score.should < 11.071
         end
       end 
