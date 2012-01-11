@@ -1,11 +1,11 @@
 SYNOPSIS
 
-	die = LoadedDie.new(1,1,2,1,1,1)
-	die.roll # => one of {0,1,2,3,4,5}, with 2 being more likely.
+  die = LoadedDie.new(1,1,2,1,1,1)
+  die.roll # => one of {0,1,2,3,4,5}, with 2 being more likely.
 
-	# And just for kicks, here's a 20 sided non loaded die: 
-	die = LoadedDie.new(*([1] * 20))
-	die.roll
+  # And just for kicks, here's a 20 sided non loaded die: 
+  die = LoadedDie.new(*([1] * 20))
+  die.roll
 
 DESCRIPTION
 
