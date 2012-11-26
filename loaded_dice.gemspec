@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.email = 'kaspar.schiess@absurd.li'
   s.extra_rdoc_files = ['README']
   s.files = %w(LICENSE README) + Dir.glob("{lib}/**/*")
-  s.homepage = 'http://kschiess.github.com/loaded_dice'
+  # s.homepage = 'http://kschiess.github.com/loaded_dice'
   s.rdoc_options = ['--main', 'README']
   s.require_paths = ['lib']
   s.summary = 'Simulates a loaded die with n sides. Perfect for non homogenous randomisation needs.'  
